@@ -31,6 +31,27 @@ RUN which dash &> /dev/null && (\
     DEBIAN_FRONTEND=noninteractive dpkg-reconfigure dash) || \
     echo "Skipping dash reconfigure (not applicable)"
 
+# --> rber
+
+# extra config files rber wants in sdk container
+COPY etc/skel/gitconfig /etc/skel/.gitconfig
+
+# /etc/skel/.vim/
+# ├── ftdetect
+# │   └── bitbake.vim
+# ├── ftplugin
+# │   └── bitbake.vim
+# ├── plugin
+# │   └── newbb.vim
+# └── syntax
+#     └── bitbake.vim
+COPY etc/skel/vim/.          /etc/skel/.vim/            
+
+# additional needed packages
+RUN apt-get -y install libncursesw5-dev
+
+# <-- rber
+
 # We remove the user because we add a new one of our own.
 # The usersetup user is solely for adding a new user that has the same uid,
 # as the workspace. 70 is an arbitrary *low* unused uid on debian.
