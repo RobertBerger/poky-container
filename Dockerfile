@@ -52,6 +52,15 @@ RUN apt-get -y install libncursesw5-dev
 
 # <-- rber
 
+# --> rber gcc-9
+RUN apt-get update && apt-get upgrade -y && apt-get install -y software-properties-common python-software-properties
+RUN add-apt-repository ppa:ubuntu-toolchain-r/test -y && apt-get update
+RUN apt-get install -y gcc g++ gcc-9 g++-9
+#RUN update-alternatives --remove-all gcc
+RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 90 --slave /usr/bin/g++ g++ /usr/bin/g++-9
+RUN gcc -v
+# <-- rber gcc-9
+
 # We remove the user because we add a new one of our own.
 # The usersetup user is solely for adding a new user that has the same uid,
 # as the workspace. 70 is an arbitrary *low* unused uid on debian.
