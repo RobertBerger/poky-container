@@ -52,14 +52,14 @@ RUN apt-get -y install libncursesw5-dev
 
 # <-- rber
 
-# --> rber gcc-6
+# --> rber gcc-8
 RUN apt-get update && apt-get upgrade -y && apt-get install -y software-properties-common python-software-properties
 RUN add-apt-repository ppa:ubuntu-toolchain-r/test -y && apt-get update
-RUN apt-get install -y gcc g++ gcc-6 g++-6
+RUN apt-get install -y gcc g++ gcc-8 g++-8
 #RUN update-alternatives --remove-all gcc
-RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 90 --slave /usr/bin/g++ g++ /usr/bin/g++-6
+RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 90 --slave /usr/bin/g++ g++ /usr/bin/g++-8
 RUN gcc -v
-# <-- rber gcc-6
+# <-- rber gcc-8
 
 # We remove the user because we add a new one of our own.
 # The usersetup user is solely for adding a new user that has the same uid,
