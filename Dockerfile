@@ -61,7 +61,9 @@ RUN apt-get install -y gcc g++ gcc-9 g++-9
  # we need a libstdc++6 for this to work:
  #   build/tmp/sysroots-uninative/x86_64-linux/usr/lib/libstdc++.so.6: version `GLIBCXX_3.4.26' not found 
  #   required by build/tmp/work/x86_64-linux/cmake-native/3.12.2-r0/build/Bootstrap.cmk/cmake 
-RUN apt-get upgrade -y libstdc++6
+ # RUN apt-get upgrade -y libstdc++6
+ # fix? https://www.yoctoproject.org/pipermail/yocto/2019-April/044995.html
+ #      https://www.yoctoproject.org/pipermail/yocto/2016-November/033134.html
  # <-- libstdc++
 RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 90 --slave /usr/bin/g++ g++ /usr/bin/g++-9
 RUN gcc -v
