@@ -61,6 +61,10 @@ RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 90 --slave /us
 RUN gcc -v
 # <-- rber gcc-6
 
+# --> rber repo
+RUN apt-get install -y repo
+# <-- rber repo
+
 # We remove the user because we add a new one of our own.
 # The usersetup user is solely for adding a new user that has the same uid,
 # as the workspace. 70 is an arbitrary *low* unused uid on debian.
