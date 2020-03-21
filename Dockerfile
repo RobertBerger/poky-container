@@ -56,6 +56,14 @@ RUN apt-get -y install libncursesw5-dev
 RUN apt-get install -y repo
 # <-- rber repo
 
+# --> rber repo
+# just for testing
+RUN apt-get install -y xterm
+# this is actually needed for:
+#   bitbake core-image-minimal -g -u taskexp
+RUN apt-get install -y python3-gi gobject-introspection gir1.2-gtk-3.0
+# <-- rber repo
+
 # We remove the user because we add a new one of our own.
 # The usersetup user is solely for adding a new user that has the same uid,
 # as the workspace. 70 is an arbitrary *low* unused uid on debian.
