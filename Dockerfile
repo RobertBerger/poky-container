@@ -47,6 +47,10 @@ COPY etc/skel/gitconfig /etc/skel/.gitconfig
 #     └── bitbake.vim
 COPY etc/skel/vim/.          /etc/skel/.vim/            
 
+# get updates
+RUN apt-get update -y 
+RUN apt-get upgrade -y 
+
 # additional needed packages
 RUN apt-get -y install libncursesw5-dev
 
