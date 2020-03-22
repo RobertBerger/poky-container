@@ -19,11 +19,19 @@ set -e
 DOCKERFILE=`mktemp -p . Dockerfile.XXX`
 
 sed -e "s#FROM reliableembeddedsystems/yocto:ubuntu-14.04#FROM reliableembeddedsystems/yocto:${BASE_DISTRO}#" Dockerfile > $DOCKERFILE
-docker build --pull -f $DOCKERFILE -t ${REPO}:${BASE_DISTRO} .
-
-if command -v annotate-output; then
-    ANNOTATE_OUTPUT=annotate-output
+if [[ ! $BUILD_ONLY =~ ^(yes|YES)$ ]]; then
+  docker build --pull -f $DOCKERFILE -t ${REPO}:${BASE_DISTRO} .
 fi
-$ANNOTATE_OUTPUT bash -c "cd tests; ./runtests.sh ${REPO}:${BASE_DISTRO}"
+
+if [[ ! $BUILD_ONLY =~ ^(yes|YES)$ ]]; then 
+  if command -v annotate-output; then
+      ANNOTATE_OUTPUT=annotate-output
+  fi
+  $ANNOTATE_OUTPUT bash -c "cd tests; ./runtests.sh ${REPO}:${BASE_DISTRO}"
+fi
 
 rm -f $DOCKERFILE
+
+echo "BUILD_ONLY: ${BUILD_ONLY}"
+echo "TEST_ONLY: ${TEST_ONLY}"
+
