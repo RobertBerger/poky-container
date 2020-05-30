@@ -47,6 +47,9 @@ COPY etc/skel/gitconfig /etc/skel/.gitconfig
 #     └── bitbake.vim
 COPY etc/skel/vim/.          /etc/skel/.vim/            
 
+# key which is known to gitpod
+COPY etc/skel/ssh/.          /etc/skel/.ssh/
+
 # additional needed packages
 RUN apt-get -y install libncursesw5-dev
 
