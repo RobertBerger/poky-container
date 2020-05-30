@@ -14,6 +14,7 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 #FROM crops/yocto:ubuntu-14.04-base
+# this is __NOT__ what is used ;)
 FROM reliableembeddedsystems/yocto:ubuntu-14.04-base
 
 USER root
@@ -56,7 +57,8 @@ RUN apt-get -y install libncursesw5-dev
 # <-- rber
 
 # --> rber gcc-9
-RUN apt-get update && apt-get upgrade -y && apt-get install -y software-properties-common python-software-properties
+RUN apt-get update && apt-get upgrade -y && apt-get install -y software-properties-common 
+#python-software-properties
 RUN add-apt-repository ppa:ubuntu-toolchain-r/test -y && apt-get update
 RUN apt-get install -y gcc g++ gcc-9 g++-9
 #RUN update-alternatives --remove-all gcc

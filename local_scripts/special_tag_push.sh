@@ -1,8 +1,8 @@
 if [ "$#" -ne 2 ]; then
     echo "Usage:"
     echo "./special_tag_push.sh <tag>"
-    echo "./special_tag_push.sh ubuntu-16.04 ubuntu-16.04"
-    echo "./special_tag_push.sh ubuntu-16.04 ubuntu-16.04-gcc-9"
+    echo "./special_tag_push.sh ubuntu-18.04 ubuntu-18.04"
+    echo "./special_tag_push.sh ubuntu-18.04 ubuntu-18.04-gcc-9"
     exit
 fi
 

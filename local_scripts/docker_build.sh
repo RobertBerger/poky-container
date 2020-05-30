@@ -6,7 +6,7 @@ then
     echo "+ $0: Too few arguments!"
     echo "+ use something like:"
     echo "+ $0 <BASE_DISTRO>"
-    echo "+ $0 ubuntu-16.04"
+    echo "+ $0 ubuntu-18.04"
     exit
 fi
 
