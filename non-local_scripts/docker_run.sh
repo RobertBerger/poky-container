@@ -1,40 +1,40 @@
 source ../container-name.sh
 IMAGE_NAME=$1
-NETWORK_INTERFACE=$2
 
-PUBLIC_PORT="6379"
+# from container-name.sh
+#TAG="v1.1.0"
 
-#TAG="20190420065849-poky-2.7-plus-snapshot"
-TAG="latest"
-
-if [ $# -lt 2 ];
+if [ $# -lt 1 ];
 then
     echo "+ $0: Too few arguments!"
     echo "+ use something like:"
-    echo "+ $0 <docker image> <network interface>"
-    echo "+ $0 reliableembeddedsystems/${CONTAINER_NAME}:${TAG} docker0"
-    echo "+ $0 reliableembeddedsystems/${CONTAINER_NAME}:${TAG} br0"
+    echo "+ $0 <docker image>" 
+    echo "+ $0 reliableembeddedsystems/${CONTAINER_NAME}:${TAG}"
     exit
 fi
 
 # remove currently running containers
-echo "+ ID_TO_KILL=\$(docker ps -a -q  --filter ancestor=$1)"
+set -x
 ID_TO_KILL=$(docker ps -a -q  --filter ancestor=$1)
 
-echo "+ docker ps -a"
 docker ps -a
-echo "+ docker stop ${ID_TO_KILL}"
 docker stop ${ID_TO_KILL}
-echo "+ docker rm -f ${ID_TO_KILL}"
 docker rm -f ${ID_TO_KILL}
-echo "+ docker ps -a"
 docker ps -a
 
-echo "+ ID=\$(docker run -t -i -d -p ${PUBLIC_PORT}:6379 ${IMAGE_NAME})"
-ID=$(docker run -t -i -d -p ${PUBLIC_PORT}:6379 ${IMAGE_NAME})
+# we need to pull latest version
+docker pull ${IMAGE_NAME}
 
-echo "+ ID ${ID}"
+# -t : Allocate a pseudo-tty
+# -i : Keep STDIN open even if not attached
+# -d : To start a container in detached mode, you use -d=true or just -d option.
+# -p : publish port PUBLIC_PORT:INTERNAL_PORT
+# -l : ??? without it no root@1928719827
+# --cap-drop=all: drop all (root) capabilites
+
+# start ash shell
+ID=$(docker run -v ${PWD}/../../../:/workdir -t -i -d ${IMAGE_NAME} /bin/sh -l)
 
 # let's attach to it:
-echo "+ docker attach ${ID}"
 docker attach ${ID}
+set +x

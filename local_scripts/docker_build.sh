@@ -10,6 +10,7 @@ then
     exit
 fi
 
+docker login
 pushd ..
 #export BASE_DISTRO="ubuntu-16.04"
 export BASE_DISTRO="${1}"
