@@ -82,6 +82,24 @@ RUN gcc -v
 RUN apt-get install -y repo
 # <-- rber repo
 
+# --> rber icecc
+RUN apt-get install -y icecc
+# <-- rber icecc
+
+# --> rber icecream-sundae
+RUN apt-get install -y g++ libcap-ng-dev libglib2.0-dev libicecc-dev liblzo2-dev libncursesw5-dev meson ninja-build
+RUN mkdir -p ~/projects/icecream-sundae && \
+    pushd ~/projects/icecream-sundae && \
+    git clone git://github.com/JPEWdev/icecream-sundae.git && \
+    cd icecream-sundae/ && \
+    mkdir builddir && \
+    cd builddir/ && \
+    meson .. --buildtype release && \
+    ninja && \
+    ninja install && \
+    popd
+# <-- rber icecream-sundae
+
 # --> rber gui
 # just for testing
 RUN apt-get install -y xterm
