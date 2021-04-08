@@ -2,8 +2,9 @@ source ../container-name.sh
 
 if [ "$#" -ne 2 ]; then
     echo "Usage:"
-    echo "./special_tag_push.sh <tag>"
+    echo "./special_tag_push.sh <local tag>  <remote tag>"
     echo "./special_tag_push.sh ubuntu-18.04 ${TAG}"
+    echo "./special_tag_push.sh ubuntu-18.04-experimental ${TAG}"
     exit
 fi
 
