@@ -7,6 +7,7 @@ then
     echo "+ use something like:"
     echo "+ $0 <BASE_DISTRO>"
     echo "+ $0 ubuntu-18.04"
+    echo "+ $0 ubuntu-18.04-experimental"
     exit
 fi
 
