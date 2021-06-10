@@ -78,6 +78,14 @@ RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 90 --slave /us
 RUN gcc -v
 # <-- rber gcc-9
 
+# --> rber extra packages for ST stuff
+#RUN DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata
+#RUN apt-get install -y libegl1-mesa libsdl1.2-dev libssl-dev pylint3 python3-git python3-jinja2 python3-pexpect python3-pip
+#RUN apt-get install -y bsdmainutils
+# we need this for the funny SD card image:
+RUN apt-get install -y gdisk
+# <-- rber extra packages for ST stuff
+
 # --> rber repo
 RUN apt-get install -y repo
 # <-- rber repo
