@@ -88,6 +88,8 @@ RUN apt-get install -y gdisk
 
 # --> rber repo
 RUN apt-get install -y repo
+# update repo for python3
+COPY usr/bin/repo /usr/bin/repo
 # <-- rber repo
 
 # --> rber icecc
